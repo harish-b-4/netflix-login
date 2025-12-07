@@ -22,23 +22,21 @@ function App() {
   }
 
   function check() {
-
-
     if (user.trim() === "" || pass.trim() === "") {
       setError("Please fill all fields")
       return
     }
 
-    axios.post("https://netflix-backend-og72.onrender.com/login",{ "username": user, "password": pass } )
-      .then(function (res) {
-
+    axios.post("https://netflix-backend-og72.onrender.com/login", {
+      username: user,
+      password: pass
+    })
+      .then(res => {
         if (res.data === true) {
           navigate("/landing")
-        }
-        else {
+        } else {
           setError("Enter correct Email or Password")
         }
-
       })
       .catch(() => {
         setError("Server error. Try again later")
@@ -46,98 +44,109 @@ function App() {
   }
 
   return (
-    <div>
+    <div className="min-h-screen w-full bg-black">
 
-      <div className='relative flex justify-center'>
+      
+      <div className="relative w-full h-screen">
 
+        
         <img
           src={netflix}
-          alt="Background Image"
-          className='min-w-full min-h-screen hidden md:flex'
+          alt="Background"
+          className="absolute inset-0 w-full h-full object-cover hidden md:flex"
         />
 
-        <h1 className="text-3xl md:text-5xl text-[#e91a21] font-semibold absolute top-5 left-5 md:left-40 z-20">NETFLIX</h1>
+        
+        <div className="absolute inset-0 bg-black/60 w-full h-full z-10"></div>
 
-        <div className="mt-20 z-10 bg-black md:bg-transparent/80 flex flex-col p-4 md:p-14 gap-10 w-full h-fit md:h-auto md:w-[31%] absolute">
+        
+        <h1 className="text-4xl md:text-5xl text-[#e91a21] font-extrabold absolute top-4 left-4 md:top-6 md:left-20 z-30">
+          NETFLIX
+        </h1>
 
-          <h1 className="font-bold text-3xl md:text-4xl text-white">Sign In</h1>
+        
+        <div className="absolute inset-0 z-20 flex justify-center items-center px-4">
+          <div className="bg-black/80 p-6 md:p-12 rounded w-full max-w-md">
 
-          <div className="flex flex-col gap-5 mt-3 md:mt-5">
+            <h1 className="text-white text-3xl md:text-4xl font-bold mb-6">Sign In</h1>
 
-            <input
-              onChange={handleUser}
-              placeholder="Email or mobile number"
-              className="border border-gray-500 px-3 py-3 rounded bg-transparent/50 text-white"
-            />
+            <div className="flex flex-col gap-5">
 
-            <input
-              onChange={handlePass}
-              placeholder="Password"
-              type="password"
-              className="border border-gray-500 px-3 py-3 rounded bg-transparent/50 text-white"
-            />
+              <input
+                onChange={handleUser}
+                placeholder="Email or mobile number"
+                className="border border-gray-600 px-3 py-3 rounded bg-black/40 text-white"
+              />
 
-            {error && (
-              <p className="text-red-500 text-sm font-semibold">{error}</p>
-            )}
+              <input
+                onChange={handlePass}
+                placeholder="Password"
+                type="password"
+                className="border border-gray-600 px-3 py-3 rounded bg-black/40 text-white"
+              />
 
-            <button
-              onClick={check}
-              className="bg-[#e91a21] hover:bg-[#c70209] duration-200 text-white py-1 md:py-2 font-medium text-lg rounded">
-              Sign In
-            </button>
+              {error && <p className="text-red-500 text-sm">{error}</p>}
 
-            <p className="text-gray-400 font-medium text-center text-lg">OR</p>
+              <button
+                onClick={check}
+                className="bg-[#e50914] hover:bg-[#b20710] duration-200 text-white py-3 text-lg rounded"
+              >
+                Sign In
+              </button>
 
-            <button className="bg-[#555353] hover:bg-[#3e3d3d] text-white py-1 md:py-2 font-medium text-lg rounded">
-              Use a sign-in code
-            </button>
+              <p className="text-gray-400 text-center">OR</p>
 
-            <a href="#" className="text-white underline text-center text-lg">Forgot password?</a>
+              <button className="bg-[#4c4c4c] hover:bg-[#3b3b3b] text-white py-3 text-lg rounded">
+                Use a sign-in code
+              </button>
 
-            <label className="flex items-center gap-2 cursor-pointer">
-              <input type="checkbox" className="h-4 w-4 accent-white" />
-              <span className="text-white text-lg">Remember me</span>
-            </label>
+              <a className="text-white text-center underline" href="#">
+                Forgot password?
+              </a>
 
-            <p className="text-gray-400 text-lg">
-              New to Netflix?
-              <a href="#" className="text-white text-base font-bold"> Sign up now.</a>
-            </p>
+              <label className="flex items-center gap-2">
+                <input type="checkbox" className="h-4 w-4 accent-white" />
+                <span className="text-white">Remember me</span>
+              </label>
 
-            <p className="text-gray-400 text-xs md:text-sm font-semibold">
-              This page is protected by Google reCAPTCHA to ensure you're not a bot.
-            </p>
+              <p className="text-gray-400">
+                New to Netflix?
+                <a href="#" className="text-white font-bold"> Sign up now.</a>
+              </p>
 
-            <a href="#" className="text-blue-500 underline text-sm">Learn more.</a>
+              <p className="text-gray-400 text-xs font-semibold">
+                This page is protected by Google reCAPTCHA to ensure you're not a bot.
+              </p>
+
+              <a href="#" className="text-blue-400 underline text-sm">
+                Learn more.
+              </a>
+
+            </div>
 
           </div>
-
         </div>
-
       </div>
 
+      {/* FOOTER */}
+      <footer className="bg-[#141414] text-gray-300 w-full px-6 py-10 md:px-20 space-y-6">
 
-      {/* Footer */}
-      <footer className='bg-[#252424] z-30 min-w-screen h-fit px-4 py-8 md:px-20 md:py-12 space-y-5 mt-[210%] md:mt-0'>
+        <p>Questions? Call 000-800-919-1743 (Toll-Free)</p>
 
-        <p className='text-white text-base'>Questions? Call 000-800-919-1743 (Toll-Free)</p>
-
-        <div className='text-white grid grid-cols-2 md:grid-cols-4 underline gap-3'>
-          <a href="">FAQ</a>
-          <a href="">Help Center</a>
-          <a href="">Terms of Use</a>
-          <a href="">Privacy</a>
-          <a href="">Cookie Preferences</a>
-          <a href="">Corporate Information</a>
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-3 underline">
+          <a>FAQ</a>
+          <a>Help Center</a>
+          <a>Terms of Use</a>
+          <a>Privacy</a>
+          <a>Cookie Preferences</a>
+          <a>Corporate Information</a>
         </div>
 
-        <select className='bg-[#252424] border border-gray-200 w-fit px-2 py-1 text-white'>
+        <select className="bg-[#141414] border border-gray-400 px-2 py-1">
           <option>English</option>
         </select>
 
       </footer>
-
     </div>
   )
 }
